@@ -24,7 +24,7 @@ EOF
 su -c '$pwd/postgres.sh' postgres
 
 # Service at restart
-cat <<EOF > /etc/local.d/postgres-custom.start
+cat > /etc/local.d/postgres-custom.start <<EOF 
 #!/bin/sh
 su postgres -c 'pg_ctl start -D /var/lib/postgresql/data'
 EOF
