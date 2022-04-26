@@ -1,5 +1,7 @@
 https://raymii.org/s/tutorials/Proxmox_VE_One_Public_IP.html
 
+https://jensd.be/343/linux/forward-a-tcp-port-to-another-ip-or-port-using-nat-with-iptables
+
 auto vmbr1
 iface vmbr1 inet static
         address 10.3.0.254/24
