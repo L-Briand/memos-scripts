@@ -1,16 +1,19 @@
 #!/bin/sh
 
-JSVC_BIN="/home/l.briand@gop.link/personal/commons-daemon/src/native/unix/jsvc"
-JAVA_HOME="/usr/lib/jvm/java-11-openjdk-amd64"
-FILE_PID="/tmp/application.pid"
-FILE_OUT="/tmp/application.out"
-FILE_ERR="/tmp/application.err"
+APPLICATION_NAME="application"
 
-CWD="/home/l.briand@gop.link/personal/kblog"
+# alpine defaults
+JSVC_BIN="/usr/bin/jsvc"
+JAVA_HOME="/usr/lib/jvm/java-17-openjdk"
+COMMON_DAEMON_JAR="/usr/share/java/commons-daemon.jar"
 
-COMMON_DAEMON_JAR="/home/l.briand@gop.link/Downloads/commons-daemon-1.3.0-bin/commons-daemon-1.3.0/commons-daemon-1.3.0.jar"
-APPLICATION_JAR="/home/l.briand@gop.link/personal/kblog/kblog/build/libs/kblog-0.1.1-fat.jar"
-APPLICATION_CLASS="net.orandja.kblog.Main"
+FILE_PID="/var/run/$APPLICATION_NAME.pid"
+FILE_OUT="/tmp/$APPLICATION_NAME.out"
+FILE_ERR="/tmp/$APPLICATION_NAME.err"
+
+CWD="/root"
+APPLICATION_JAR="/path/to.jar"
+APPLICATION_CLASS="com.example.application"
 
 do_execute() {
     set -x
