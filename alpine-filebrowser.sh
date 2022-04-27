@@ -19,7 +19,10 @@ filebrowser config init \
     -r /srv/files \
     -a 0.0.0.0 \
     -p 80 \
-    -l /var/run/filebrowser.log
+    -l /var/run/filebrowser.log \
+    --shell 'ash -c' \
+    --commands 'ash'
+
 
 # Set user that can't be deleted because of id 1.
 filebrowser users add admin admin --perm.admin -d /etc/filebrowser/filebrowser.db 
