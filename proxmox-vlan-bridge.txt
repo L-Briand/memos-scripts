@@ -2,6 +2,20 @@ https://raymii.org/s/tutorials/Proxmox_VE_One_Public_IP.html
 
 https://jensd.be/343/linux/forward-a-tcp-port-to-another-ip-or-port-using-nat-with-iptables
 
+# Redirect in port 80 to 10.3.0.1:80
+iptables -t nat -A PREROUTING -p tcp --dport 80 -j DNAT --to-destination 10.3.0.1:80
+# Redirect out, from subnet, into vmbr0, masking ip
+iptables -t nat -A POSTROUTING -s '10.3.0.0/24' -o vmbr0 -j MASQUERADE
+# Redirect out, from selected protocol & ip & port, to ip
+# In proxmox, use line above
+iptables -t nat -A POSTROUTING -p tcp -d 10.3.0.1 --dport 80 -j SNAT --to-source 10.3.0.254:80
+
+# Make it permanent 
+sudo /sbin/iptables-save > /etc/iptables/rules.v4
+
+# or save it as network config 
+
+# /etc/network/interfaces :
 auto vmbr1
 iface vmbr1 inet static
         address 10.3.0.254/24
@@ -10,6 +24,10 @@ iface vmbr1 inet static
         bridge-fd 0
         bridge-vlan-aware yes
         bridge-vids 2-4094
+        # Allow for local ips to be accessed from this ip
         post-up echo 1 > /proc/sys/net/ipv4/ip_forward
+        # proxy all connection to vmbr0
         post-up iptables -t nat -A POSTROUTING -s '10.3.0.0/24' -o vmbr0 -j MASQUERADE
         post-down iptables -t nat -D POSTROUTING -s '10.3.0.0/24' -o vmbr0 -j MASQUERADE
+
+systemctl restart networking
