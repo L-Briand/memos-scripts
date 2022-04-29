@@ -1,5 +1,6 @@
 #!/bin/sh
 apk update
+apk upgrade
 apk add postgresql
 
 # create required postgres directory
@@ -8,7 +9,7 @@ chown postgres:postgres /run/postgresql/
 
 
 # Commands executed by postgres user
-cat <<EOF > postgres.sh
+cat  > postgres.sh <<EOF
 #!/bin/sh
 mkdir /var/lib/postgresql/data
 chmod 0700 /var/lib/postgresql/data

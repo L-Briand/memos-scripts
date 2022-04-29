@@ -7,8 +7,10 @@ echo 1 > /proc/sys/net/ipv4/ip_forward
 
 # Redirect in port 80 to 10.3.0.1:80 
 # interface is important for subnet in vmbr1 to access internet.
-iptables -t nat -D PREROUTING -i vmbr0 -p tcp --dport 80 -j DNAT --to-destination 10.3.0.1:80
-iptables -t nat -D PREROUTING -i vmbr0 -p tcp --dport 443 -j DNAT --to-destination 10.3.0.1:443
+iptables -t nat -A PREROUTING -i vmbr0 -p tcp --dport 80 -j DNAT --to-destination 10.3.0.1:80
+iptables -t nat -A PREROUTING -i vmbr0 -p tcp --dport 443 -j DNAT --to-destination 10.3.0.1:443
+
+# "-A PREROUTING" to delete
 
 # Redirect out, from subnet, into vmbr0, masking ip
 iptables -t nat -A POSTROUTING -s '10.3.0.0/24' -o vmbr0 -j MASQUERADE

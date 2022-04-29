@@ -1,5 +1,6 @@
 #!/bin/sh
 apk update
+apk upgrade
 apk add bash curl
 
 # fetch software
