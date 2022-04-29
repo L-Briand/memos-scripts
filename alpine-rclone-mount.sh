@@ -1,7 +1,7 @@
 #!/bin/sh
 apk update
 apk upgrade
-apk add rclone
+apk add fuse rclone
 
 # Vars for service to serve
 if [ -z $RCLONE_MOUNT_PATH ];  then "/mnt"; fi

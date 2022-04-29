@@ -1,7 +1,7 @@
 #!/bin/sh
 apk update
 apk upgrade
-apk add fuse rclone
+apk add rclone
 
 # create an empty config to remove notice.
 mkdir -p /root/.config/rclone/
@@ -22,7 +22,7 @@ description="Serve ${RCLONE_PATH} directory with rclone"
 pidfile="/run/\${RC_SVCNAME}.pid"
 
 command="/usr/bin/rclone"
-command_args="serve ftp --user ${RCLONE_USER} --pass ${RCLONE_PASSWORD} --addr :${RCLONE_PORT} ${RCLONE_PATH}"
+command_args="serve ftp --vfs-cache-mode off --dir-cache-time 30s --user ${RCLONE_USER} --pass ${RCLONE_PASSWORD} --addr :${RCLONE_PORT} ${RCLONE_PATH}"
 command_background=true
 EOF
 
