@@ -22,7 +22,7 @@ description="Serve ${RCLONE_PATH} directory with rclone"
 pidfile="/run/\${RC_SVCNAME}.pid"
 
 command="/usr/bin/rclone"
-command_args="serve ftp --vfs-cache-mode off --dir-cache-time 30s --user ${RCLONE_USER} --pass ${RCLONE_PASSWORD} --addr :${RCLONE_PORT} ${RCLONE_PATH}"
+command_args="serve ftp --vfs-cache-mode minimal --buffer-size 8M --dir-cache-time 30s --user ${RCLONE_USER} --pass ${RCLONE_PASSWORD} --addr :${RCLONE_PORT} ${RCLONE_PATH}"
 command_background=true
 EOF
 
