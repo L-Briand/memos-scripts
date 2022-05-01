@@ -14,9 +14,10 @@ gitlab-runner register \
   --url "https://gitlab.orandja.fr/" \
   --registration-token "$PROJECT_REGISTRATION_TOKEN" \
   --executor "shell" \
-  --tag-list "" \
+  --tag-list "$RUNNER_TAGS" \
   --run-untagged="true"
 
-gitlab-runner install -u root
+chown -R gitlab-runner:gitlab-runner /etc/gitlab-runner/
+
 rc-service gitlab-runner start
-rc-udpdate add gitlab-runner
+rc-update add gitlab-runner
