@@ -8,8 +8,8 @@ mkdir /run/postgresql
 chown postgres:postgres /run/postgresql/
 
 
-# Commands executed by postgres user
-cat  > postgres.sh <<EOF
+# Commands executed by postgres user to init db
+cat > /var/lib/postgresql/init.sh <<EOF
 #!/bin/sh
 mkdir /var/lib/postgresql/data
 chmod 0700 /var/lib/postgresql/data
@@ -22,11 +22,16 @@ echo "listen_addresses='*'" >> /var/lib/postgresql/data/postgresql.conf
 pg_ctl start -D /var/lib/postgresql/data
 EOF
 
-su -c '$pwd/postgres.sh' postgres
+chmod +x /var/lib/postgresql/init.sh
+chown postgres:postgres /var/lib/postgresql/init.sh
+su - postgres -c '~/init.sh' 
 
 # Service at restart
+# /run/postgresql
 cat > /etc/local.d/postgres-custom.start <<EOF 
 #!/bin/sh
+mkdir /run/postgresql
+chown postgres:postgres /run/postgresql/
 su postgres -c 'pg_ctl start -D /var/lib/postgresql/data'
 EOF
 
