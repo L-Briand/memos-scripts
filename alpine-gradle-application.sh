@@ -1,7 +1,7 @@
 #!/bin/sh
 apk update
 apk upgrade
-apk add openjdk17-jre openssh-client openssh-server openntpd
+apk add openjdk17-jre openssh-client openssh-server openntpd netcat-openbsd
 
 rc-update add openntpd default
 rc-service openntpd start
@@ -11,6 +11,9 @@ echo $AUTHORIZED_KEY >> ~/.ssh/authorized_keys
 
 rc-service sshd start
 rc-update add sshd
+
+mkdir /var/log/application/
+mkdir /var/application/
 
 # upload you app into /opt/application/
 
