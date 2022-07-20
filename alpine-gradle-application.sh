@@ -7,13 +7,14 @@ rc-update add openntpd default
 rc-service openntpd start
 
 AUTHORIZED_KEY="ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDN0BeE70ayfzzrU2kjMfsdaAlV8ol1LvVHuF1aPl9Ex2Cgb6Cs2YNzEPEbYHTP8Th1vUJ3cjWk9TcHR6PdcgPbHRPa2Xd+VP7R5xeOwrhleQYegFqLBIoElNhuZtSHbqLh4n2j+0TYmOn++HEIHE6T0a5Y0+5rN4YhbufTsdNpMpVdggWUofXuVPAMynv+VS3wHbuVgDBV59bTVnvCEQFyBO0UYSQKXbkyFAxkAoiDSYg4j1t4gZwVvhQ/P5HxLtkL0DoojZiSn2QZQjR10ftklLyjcBC/kELyR8wwFO26hyIqTTv563Qv+tK8r3ZsE/EeC/jaIzWvNWRqPk1Vc/TcTAv6PfYGkbWKILePpV5xtYU+2X4MOLNZFlKG+eObWk/hS9NvE93zf4TwpJoaEY8+BgZZesRJj+4DmlFcR8q+jyifMyleQY4ZReAETpuBCt7aUN01d3r7OiyD0L3XKDSjwKvN/QV1orU6UxF2Rta8F9ZiLGkWT3SpvjEmvi9Jd3E= root@gitlab-runner-local-1"
+mkdir -p ~/.ssh/
 echo $AUTHORIZED_KEY >> ~/.ssh/authorized_keys
 
 rc-service sshd start
 rc-update add sshd
 
-mkdir /var/log/application/
-mkdir /var/application/
+mkdir -p /var/log/application/
+mkdir -p /var/application/
 
 # upload you app into /opt/application/
 
